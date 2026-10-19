@@ -1,7 +1,17 @@
 # montiapm-cli
 
 Zero-dependency CLI and MCP server for the Monti APM REST API (`https://api.montiapm.com/v1`).
-Node 18+.
+Node 18+. MIT licensed.
+
+## Install
+
+```bash
+git clone https://github.com/harryadel/montiapm-cli.git
+cd montiapm-cli
+npm link            # puts the `montiapm` command on your PATH (optional)
+```
+
+Everything below works with `node montiapm.mjs …` too; `montiapm …` is the linked form.
 
 ## Auth
 
@@ -55,11 +65,11 @@ The script regroups these into one series per label and can downsample with `--s
 
 ## MCP
 
-Registered in Claude Code as `montiapm-rest`:
+Register it in Claude Code as `montiapm-rest` (replace the path with your clone):
 
 ```bash
 claude mcp add-json --scope user montiapm-rest \
-  '{"type":"stdio","command":"node","args":["/home/harry/Projects/montiapm-cli/montiapm.mjs","mcp"],"env":{"MONTI_APP_ID":"<app id>"}}'
+  '{"type":"stdio","command":"node","args":["/path/to/montiapm-cli/montiapm.mjs","mcp"],"env":{"MONTI_APP_ID":"<app id>"}}'
 ```
 
 Tools: `list_metrics`, `query_metric` (same options as the CLI; pass `includePoints: false` for summaries only).
@@ -69,7 +79,7 @@ For Codex, add to `~/.codex/config.toml`:
 ```toml
 [mcp_servers.montiapm-rest]
 command = "node"
-args = ["/home/harry/Projects/montiapm-cli/montiapm.mjs", "mcp"]
+args = ["/path/to/montiapm-cli/montiapm.mjs", "mcp"]
 [mcp_servers.montiapm-rest.env]
 MONTI_APP_ID = "<app id>"
 ```
